@@ -1,0 +1,21 @@
+El modo watch sirve para escuchar los cambios del proyecto para compilarlo de forma automatica.
+
+👀 Webpack Watch
+<h4>Apuntes</h4>
+El modo watch hace que nuestro proyecto se compile de forma automática
+Es decir que está atento a cambios
+Para habilitarlo debemos agregar lo siguiente en la configuración de webpack
+
+module.exports = {
+	...
+	watch: true
+}
+
+Cada vez que haya un cambio hara un build automático
+
+La forma más común en la que el watch se suele usar dentro de un archivo package.json es esta:
+
+"dev": "webpack --config webpack.config.dev.js",
+"watch": "npm run dev --watch"
+
+Simplemente se ejecuta el script dev, pero con el flag watch 

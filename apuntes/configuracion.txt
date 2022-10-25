@@ -1,0 +1,63 @@
+⚙️ Configuración de webpack.config.js
+<h4>Apuntes</h4>
+El archivo de configuración nos va ayudar a poder establecer la configuración y elementos que vamos a utilizar
+Para poder crear el archivo de configuración en la raíz del proyecto creamos un archivo llamado webpack.config.js
+En el mismo debemos decir
+El punto de entrada
+Hacia a donde a enviar la configuración de nuestro proyecto
+Las extensiones que vamos usar
+const path = require('path');
+
+module.exports = {
+  // Entry nos permite decir el punto de entrada de nuestra aplicación
+  entry: "./src/index.js",
+  // Output nos permite decir hacia dónde va enviar lo que va a preparar webpacks
+  output: {
+    // path es donde estará la carpeta donde se guardará los archivos
+    // Con path.resolve podemos decir dónde va estar la carpeta y la ubicación del mismo
+    path: path.resolve(__dirname, "dist"),
+    // filename le pone el nombre al archivo final
+    filename: "main.js"
+  },
+  resolve: {
+    // Aqui ponemos las extensiones que tendremos en nuestro proyecto para webpack los lea
+    extensions: [".js"]
+  },
+}
+El flag —config indica donde estará nuestro archivo de configuración
+npx webpack --mode production --config webpack.config.js
+Para poder hacerlo más amigable el comando puedes crear un script en package.json
+"scripts": {
+		...
+    "build": "webpack --mode production --config webpack.config.js"
+  },
+RESUMEN: Puedes crear un archivo webpack.config.js en el cual estarán las configuraciones con las cuales webpack trabajara, entre ellas están los puntos de entrada y salida, extensiones de archivos, entre otras características que se verán próximamente en él curso.
+
+const path = require('path'); // Para trabajar con archivos y rutas de directorios
+
+module.exports = {
+    mode: 'production', // le pasamos explicitamente el modo desde el archivo
+    entry: './src/index.js', // el punto de entrada de mi aplicación
+    output: { // Esta es la salida de mi bundle
+        path: path.resolve(__dirname, 'public_html/js'),
+        // resolve lo que hace es darnos la ruta absoluta de el S.O hasta nuestro archivo
+        // para no tener conflictos entre Linux, Windows, etc
+        filename: 'main.js', 
+        // EL NOMBRE DEL ARCHIVO FINAL,
+    },
+    resolve: {
+        extensions: ['.js'] // LOS ARCHIVOS QUE WEBPACK VA A LEER
+    }
+}
+
+Para el que tenga dudas similares a las mias:
+
+require(“path”)
+require es una forma de importar módulos en node.
+path es un objeto o clase que viene por defecto en node. Viene con varios métodos que podemos usar https://nodejs.org/api/path.html
+
+__dirname
+dirname lo incluye node también. Imprime el directorio actual en el que esta funcionando el proyecto de node, por ejemplo si usas node en /Tupc/fulanito/proyectos. Lo usamos porque si subimos este código a un servidor en la nube, el directorio en el que vamos a trabajar en esa máquina en la nube va a ser diferente al de nuestro pc https://nodejs.org/docs/latest/api/modules.html#__dirname
+
+path.resolve()
+Es un método de path. Sirve simplemente para concatenar direcciones. Si usamos path.resolve("/mipc", “/fulanito”), el resultado sería /mipc/fulanito https://nodejs.org/api/path.html#pathresolvepaths

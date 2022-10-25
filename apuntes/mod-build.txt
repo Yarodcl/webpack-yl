@@ -1,0 +1,3 @@
+Para limpiar nuestros archivos en el dist de Webpack necesitamos poner en output
+
+Clean: true, y será suficiente para limpiar cada vez que entremos a produccion ya que no será necesario limpiar en modo desarrollo

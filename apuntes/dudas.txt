@@ -1,0 +1,20 @@
+1. ¿Qué es webpack-cli?
+CLI se refiere a Conmmand line interface y básicamente es instalar los comandos de webpack en la terminal para que puedas ejecutarlos.
+En cuanto a “-D”, es la abreviación de “–save-dev”, lo cual indica que esta es una dependencia que se utilizará solo para el desarrollo del proyecto y que no afecta para el funcionamiento para cuando se hace el despliegue a producción.
+
+¿Por qué “npx webpack” y no “npm webpack”?
+NPM se refiere a “node package manager” y sirve para instalar paquetes como tal. Cuando instalas un paquete, posteriormente necesitarás indicar dónde se encuentra el paquete para ser ejecutado. Esto se hace mediante dos maneras (elegir la que se te haga más fácil):
+
+Indicando en la terminal donde se encuentra el paquete:
+`./node_modules/.bin/your-package-name``
+poniendo un script en tu “package.json”:
+{
+    "name": "Your app",
+    "version":  "1.0.0",
+    "scripts":  {
+            "your-package":  "your-package-name"
+     }
+}
+y después ejecutandolo en la terminal mediante: `npm run your-package-name``
+
+NPX viene de “node package execute” y en esencia sirve para ejecutar paquetes sin necesidad de instalarlos previamente. NPX checa si es que ya tenías instalado el paquete y si no, lo descarga e instala para hacer una ejecución de una sola vez.

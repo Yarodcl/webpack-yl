@@ -1,0 +1,53 @@
+BABEL LOADER PARA JAVASCRIPT
+
+Babel es una herramienta que nos permite transformar nuestro código JS de última generación (o con funcionalidades extras) a JS que cualquier navegador o versión de Node.js entienda.
+
+En Webpack, contamos con loaders para preprocesar los archivos y convertirlos en módulos validos que pueden ser consumidos por la aplicación.
+
+Para iniciar debemos instalar las dependencias necesarias, mediante el comando npm install babel-loader @babel/core @babel/preset-env @babel/plugin-transform-runtime -D.
+Esto nos instalará la dependencia completa para Babel. 🔗 GitHub babel-loader. @babel/plugin-transform-runtime nos permite trabajar con asincronismo.
+
+Lo siguiente es crear un archivo oculto en la raíz de nuestro directorio al cual le llamaremos .babelrc, este archivo presentado de la siguiente manera:
+
+// Configuración base de babel
+{
+    "presets": [
+        "@babel/preset-env"
+    ],
+    "plugins": [
+        "@babel/plugin-transform-runtime"
+    ]
+}
+Lo que sigue es añadir la configuración a nuestro Webpack.
+
+const path = require("path");
+
+module.exports = {
+  entry: "./src/index.js",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "main.js",
+  },
+  resolve: {
+    extensions: [".js"],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+        },
+      },
+    ],
+  },
+};
+Elementos nuevos añadidos:
+
+module: Es el sitio donde vamos a añadir la nueva configuración de babel.
+rules: Las reglas que se establecerán dentro del proyecto.
+test: qué tipo de extensiones vamos a trabajar, o cuáles archivos vamos a transformar. Para ello utilizaremos regEx.
+exclude: Necesitamos excluir archivos para evitar dañar nuestro proyecto, especificamente archivos de /node_modules/
+use: Aquí vamos a definir qué loader vamos a utilizar para la transformación.
+Básicamente Webpack leerá toda la instrucción de la siguiente manera: "Cuando encuentres un import o un require con extensión .mjs o .js, usa babel-loader para transformarlo antes de empaquetarlo.*
