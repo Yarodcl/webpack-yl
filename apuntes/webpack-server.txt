@@ -1,0 +1,32 @@
+Actualmente Webpack Dev Server ha cambiado un poquito algunas de sus opciones estan deprecadas, la documentacion oficial parace que no ha sido actualizada, sin embargo los cambios son pequeños:
+
+.
+Asegurense de cambiar la propiedad contentBase por static, de este modo:
+
+devServer: {
+		static: path.join(__dirname, 'dist'),
+		compress: true,
+		historyApiFallback: true,
+		port: 8080,
+		open: true,
+	}
+.
+Por convencion, el archivo html raiz que las tecnologias buscan se llama index.html, entonces verifiquen que su html resultante en la carpeta dist, lleve ese nombre para que se le sea facil encontrarlo.
+
+plugins: [
+		new HtmlWebpackPlugin({
+			inject: 'body',
+			template: './public/index.html',
+			filename: './index.html',
+		}),
+	],
+.
+Finalmente el script en el package.json lo corren sin problemas:
+
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "node ./scripts/create-env.js && webpack --config webpack.config.js",
+		"dev": "webpack --config webpack.config.dev.js",
+		"watch": "webpack --config webpack.config.dev.js --watch",
+		"start": "webpack serve --config webpack.config.dev.js"
+	},

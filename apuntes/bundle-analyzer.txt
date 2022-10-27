@@ -1,0 +1,13 @@
+🥉 Webpack Bundle Analyzer
+<h4>Apuntes</h4>
+Cuando tenemos un proyecto es buena idea poder revisar su impacto en tamaño por ese motivo webpack nos ofrece un paquete para poder verificar y analizar el tamaño del bundle final
+Para instalar corremos el comando
+NPM
+
+npm install -D webpack-bundle-analyzer
+YARN
+
+yarn add -D webpack-bundle-analyzer
+Si deseamos hacer un análisis debemos correr los siguientes comandos
+npx webpack --profile --json > stats.json
+npx webpack-bundle-analyzer stats.json
